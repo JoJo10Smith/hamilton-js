@@ -41,6 +41,10 @@ output_columns = [
 # set up db connection for sql materializer below
 conn = sqlite3.connect("df.db")
 
+# remove an previous instances of the 'test' table that will be created next
+conn.cursor().execute("DROP TABLE IF EXISTS test;")
+conn.commit()
+
 materializers = [
     # materialize the dataframe to a pickle file
     to.pickle(
